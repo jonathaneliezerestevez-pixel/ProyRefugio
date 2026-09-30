@@ -1,0 +1,75 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import Footer from '../../components/layout/Footer.astro';
+import AnimalForm from '../../components/animals/AnimalForm.astro';
+import EmptyState from '../../components/ui/EmptyState.astro';
+---
+<BaseLayout title="Animales · Refugio">
+  <div class="min-h-screen bg-cream">
+    <Navbar compact />
+    <main class="mx-auto max-w-7xl px-6 py-12 md:px-12">
+      <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div><p class="text-xs font-bold uppercase tracking-[0.3em] text-ocean">Panel de gestión</p><h1 class="mt-3 font-display text-5xl text-ink md:text-6xl">Nuestros animales</h1><p class="mt-3 text-sm text-ink/60">Cada registro representa una historia que merece ser contada.</p></div>
+        <button id="logout" class="rounded-full border border-ink/20 px-5 py-3 text-sm font-bold text-ink transition hover:bg-ink hover:text-white">Cerrar sesión</button>
+      </div>
+      <div class="mt-12 grid gap-8 lg:grid-cols-[1fr_340px]">
+        <section>
+          <form id="filter-form" class="mb-7 grid gap-3 rounded-3xl bg-white p-5 shadow-sm md:grid-cols-5">
+            <input class="field md:col-span-2" name="nombre" placeholder="Buscar por nombre" />
+            <input class="field" name="raza" placeholder="Raza" />
+            <select class="field" name="sexo"><option value="">Sexo</option><option>Hembra</option><option>Macho</option></select>
+            <select class="field" name="tipoAnimal"><option value="">Tipo</option><option>Perro</option><option>Gato</option></select>
+            <button class="button-primary md:col-span-5" type="submit">Buscar animales</button>
+          </form>
+          <div id="animals-grid" class="grid gap-5 sm:grid-cols-2"></div>
+          <div id="animals-empty" class="hidden"><EmptyState message="Prueba con otros filtros o registra un nuevo compañero." /></div>
+          <p id="animals-message" class="mt-5 hidden rounded-xl px-4 py-3 text-sm"></p>
+        </section>
+        <aside>
+          <div class="mb-4"><p class="text-xs font-bold uppercase tracking-[0.3em] text-ocean">Nuevo registro</p><h2 class="mt-2 font-display text-3xl text-ink">Añadir animal</h2></div>
+          <AnimalForm />
+        </aside>
+      </div>
+    </main>
+    <Footer compact />
+  </div>
+</BaseLayout>
+<script>
+  import { animalApi } from '../../services/api';
+  import { animalSchema } from '../../schemas/animal.schema';
+  import { authStore } from '../../stores/auth.store';
+  import type { AnimalInput } from '../../types/animal';
+
+  const grid = document.querySelector<HTMLDivElement>('#animals-grid');
+  const empty = document.querySelector<HTMLDivElement>('#animals-empty');
+  const message = document.querySelector<HTMLParagraphElement>('#animals-message');
+  const showMessage = (text: string, error = true) => { if (message) { message.textContent = text; message.className = `mt-5 rounded-xl px-4 py-3 text-sm ${error ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`; } };
+  const card = (animal: any) => {
+    const article = document.createElement('article');
+    article.className = `rounded-3xl border border-ink/10 p-5 transition hover:-translate-y-1 hover:shadow-soft ${animal.TipoAnimal === 'Perro' ? 'bg-sun/30' : 'bg-coral/20'}`;
+    article.innerHTML = `<div class="flex items-start justify-between"><span class="rounded-full bg-white/80 px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink">${animal.TipoAnimal}</span><span class="text-2xl">${animal.TipoAnimal === 'Perro' ? '🐶' : '🐱'}</span></div><h3 class="mt-8 font-display text-3xl text-ink">${animal.Nombre}</h3><p class="mt-1 text-sm text-ink/70">${animal.Raza} · ${animal.Edad} ${animal.Edad === 1 ? 'año' : 'años'}</p><div class="mt-5 flex items-center justify-between border-t border-ink/10 pt-4 text-xs font-semibold text-ink/60"><span>${animal.Sexo}</span><a href="/animals/edit?id=${animal.Identificador}" class="font-bold text-ink underline decoration-sun decoration-2 underline-offset-4">Editar</a></div>`;
+    return article;
+  };
+  async function loadAnimals(filters = {}) {
+    try {
+      const animals = await animalApi.list(filters);
+      if (grid) { grid.replaceChildren(...animals.map(card)); }
+      empty?.classList.toggle('hidden', animals.length > 0);
+      if (message) message.classList.add('hidden');
+    } catch (error) { showMessage(error instanceof Error ? error.message : 'No se pudieron cargar los animales'); }
+  }
+  if (!authStore.isAuthenticated()) window.location.href = '/login';
+  document.querySelector('#filter-form')?.addEventListener('submit', (event) => { event.preventDefault(); const data = Object.fromEntries(new FormData(event.currentTarget as HTMLFormElement).entries()) as Record<string, string>; loadAnimals(data); });
+  document.querySelector('#logout')?.addEventListener('click', async () => { try { await import('../../services/api').then(({ authApi }) => authApi.logout()); } catch {} authStore.clear(); window.location.href = '/login'; });
+  document.querySelector('#animal-form')?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget as HTMLFormElement;
+    const output = document.querySelector<HTMLParagraphElement>('#form-message');
+    const result = animalSchema.safeParse(Object.fromEntries(new FormData(form).entries()));
+    if (!result.success) { if (output) { output.textContent = result.error.issues[0].message; output.className = 'rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700'; } return; }
+    try { await animalApi.create(result.data as AnimalInput); form.reset(); if (output) { output.textContent = 'Animal registrado correctamente'; output.className = 'rounded-xl bg-green-50 px-4 py-3 text-sm text-green-700'; } loadAnimals(); } catch (error) { if (output) { output.textContent = error instanceof Error ? error.message : 'No se pudo registrar'; output.className = 'rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700'; } }
+  });
+  loadAnimals();
+</script>
+

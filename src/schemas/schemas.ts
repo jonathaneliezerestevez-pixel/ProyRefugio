@@ -1,0 +1,1 @@
+﻿import {z} from 'zod'; export const loginSchema=z.object({usuario:z.string().min(1).max(15),contrasena:z.string().min(1).max(60)}); export const animalSchema=z.object({nombre:z.string().min(1),raza:z.string().min(1),edad:z.coerce.number().int().nonnegative(),sexo:z.enum(['Hembra','Macho']),tipoAnimal:z.enum(['Perro','Gato'])});

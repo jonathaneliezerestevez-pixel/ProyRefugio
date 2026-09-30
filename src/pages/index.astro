@@ -1,0 +1,76 @@
+﻿---
+import Layout from '../layouts.astro';
+---
+<Layout>
+  <header class="absolute left-0 top-0 z-20 w-full px-6 py-6 md:px-12">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between" aria-label="Navegación principal">
+      <a href="/" class="text-xl font-bold tracking-tight text-white"><span class="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-sun text-xs text-ink">✦</span>Angelitos de Édgar</a>
+      <div class="hidden items-center gap-7 rounded-full border border-white/50 px-6 py-2 text-[10px] font-bold uppercase tracking-widest text-white md:flex">
+        <a href="#historia" class="hover:text-sun">Historia</a><a href="#ayudar" class="hover:text-sun">Cómo ayudar</a><a href="#contacto" class="hover:text-sun">Contacto</a><a href="/login" class="hover:text-sun">Panel</a>
+      </div>
+      <button id="menu" class="text-2xl text-white md:hidden" aria-label="Abrir menú">☰</button>
+    </nav>
+    <div id="mobile" class="mx-auto mt-4 hidden max-w-7xl rounded-2xl bg-white p-5 text-sm font-bold text-ink shadow-xl md:hidden"><a class="block py-2" href="#historia">Historia</a><a class="block py-2" href="#ayudar">Cómo ayudar</a><a class="block py-2" href="#contacto">Contacto</a><a class="block py-2" href="/login">Panel</a></div>
+  </header>
+
+  <main>
+    <section class="relative min-h-[700px] overflow-hidden bg-ink text-white">
+      <div class="absolute right-0 top-0 h-full w-full bg-sun md:w-[45%]"></div>
+      <div class="relative mx-auto grid min-h-[700px] max-w-7xl items-center gap-8 px-6 pb-16 pt-36 md:grid-cols-2 md:px-12 md:pt-24">
+        <div class="relative z-10 max-w-xl">
+          <p class="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-sun">Santa Cruz de la Sierra · Bolivia</p>
+          <h1 class="font-display text-6xl leading-[.9] tracking-tight md:text-8xl">Angelitos<br /><span>de Édgar</span></h1>
+          <p class="mt-8 max-w-md text-lg leading-8 text-white/80">Un hogar temporal para animales rescatados en Santa Cruz.</p>
+          <p class="mt-3 max-w-md text-sm leading-7 text-white/65">Rescatamos, cuidamos y buscamos familias responsables para perros y gatos que necesitan una segunda oportunidad.</p>
+          <div class="mt-8 flex flex-wrap gap-3"><a class="button-primary" href="#historia">Conoce el refugio</a><a class="button-outline" href="#ayudar">Apoya nuestra misión</a></div>
+        </div>
+        <div class="relative z-10 flex justify-center md:justify-end"><img src="/images/refugio-hero.svg" alt="Perro y gato rescatados" class="w-full max-w-[570px] drop-shadow-2xl" /></div>
+      </div>
+    </section>
+
+    <section class="bg-cream px-6 py-16 md:py-24"><div class="mx-auto max-w-7xl"><div class="grid gap-5 md:grid-cols-3">
+      <div class="rounded-3xl bg-white p-7"><p class="text-4xl font-bold text-ocean">+400</p><p class="mt-2 text-sm font-semibold text-ink">animales para adopción reportados en 2025</p><p class="mt-3 text-xs text-ink/50">La cifra puede cambiar con nuevos rescates y adopciones.</p></div>
+      <div class="rounded-3xl bg-sun p-7"><p class="text-4xl font-bold text-ink">+2.000</p><p class="mt-2 text-sm font-semibold text-ink">animales ayudados en adopción a lo largo de los años</p></div>
+      <div class="rounded-3xl bg-leaf p-7 text-white"><p class="text-4xl font-bold">Perros y gatos</p><p class="mt-2 text-sm font-semibold">rescatados, alimentados y atendidos</p></div>
+    </div></div></section>
+
+    <section id="historia" class="bg-white px-6 py-24"><div class="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 md:items-center"><div><p class="text-xs font-bold uppercase tracking-[.3em] text-ocean">Nuestra historia</p><h2 class="mt-4 font-display text-5xl leading-tight text-ink md:text-6xl">Una misión que nació del rescate.</h2></div><div class="text-sm leading-8 text-ink/70"><p>Angelitos de Edgar nació a partir de la labor de <strong class="text-ink">Édgar Ortega Carrizo</strong>, quien comenzó rescatando animales en situación de abandono.</p><p class="mt-5">Con el tiempo, el proyecto creció hasta convertirse en un refugio que ha ayudado a cientos de perros y gatos en Santa Cruz.</p><p class="mt-5 text-xs text-ink/50">Las cantidades de animales atendidos corresponden a reportes de distintos años y no representan un número permanente.</p></div></div></section>
+
+    <section id="ayudar" class="bg-ink px-6 py-24 text-white"><div class="mx-auto max-w-7xl"><p class="text-xs font-bold uppercase tracking-[.3em] text-sun">Tu ayuda transforma vidas</p><h2 class="mt-4 max-w-2xl font-display text-5xl leading-tight md:text-6xl">Hay muchas formas de ser parte.</h2><div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="rounded-3xl bg-white/10 p-7"><span class="text-3xl">♡</span><h3 class="mt-7 font-display text-2xl">Donar alimentos</h3><p class="mt-3 text-sm leading-6 text-white/65">Apoya la alimentación diaria de perros y gatos.</p></article>
+      <article class="rounded-3xl bg-sun p-7 text-ink"><span class="text-3xl">✚</span><h3 class="mt-7 font-display text-2xl">Donar medicamentos</h3><p class="mt-3 text-sm leading-6 text-ink/70">Ayuda a cubrir emergencias y atención veterinaria.</p></article>
+      <article class="rounded-3xl bg-white/10 p-7"><span class="text-3xl">☼</span><h3 class="mt-7 font-display text-2xl">Abrigo y materiales</h3><p class="mt-3 text-sm leading-6 text-white/65">Colchas, abrigo, materiales de limpieza y protección.</p></article>
+      <article class="rounded-3xl bg-white/10 p-7"><span class="text-3xl">⌂</span><h3 class="mt-7 font-display text-2xl">Adopción responsable</h3><p class="mt-3 text-sm leading-6 text-white/65">Una familia es la mejor segunda oportunidad.</p></article>
+      <article class="rounded-3xl bg-white/10 p-7"><span class="text-3xl">✦</span><h3 class="mt-7 font-display text-2xl">Ser voluntario</h3><p class="mt-3 text-sm leading-6 text-white/65">Colabora con tiempo, cuidado y compromiso.</p></article>
+      <article class="rounded-3xl bg-white/10 p-7"><span class="text-3xl">↗</span><h3 class="mt-7 font-display text-2xl">Compartir</h3><p class="mt-3 text-sm leading-6 text-white/65">Difunde rescates, adopciones y campañas oficiales.</p></article>
+    </div></div></section>
+
+    <section id="creadores" class="bg-mint px-6 py-20 md:py-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="overflow-hidden rounded-[2rem] bg-ink shadow-soft">
+          <div class="grid items-center gap-10 p-8 md:grid-cols-[220px_1fr] md:p-12 lg:grid-cols-[260px_1fr_220px]">
+            <div class="flex justify-center">
+              <div class="flex h-44 w-44 items-center justify-center rounded-full bg-white p-5 shadow-xl md:h-52 md:w-52">
+                <img src="/images/escudo-infosis.png" alt="Escudo de la Dirección de Carrera de Informática y Sistemas, FICH UAGRM" class="max-h-full max-w-full object-contain" />
+              </div>
+            </div>
+            <div class="text-white">
+              <p class="text-xs font-bold uppercase tracking-[.28em] text-sun">Proyecto estudiantil</p>
+              <h2 class="mt-4 font-display text-4xl leading-tight md:text-5xl">Creado con propósito y tecnología.</h2>
+              <p class="mt-5 max-w-2xl text-sm leading-7 text-white/70">Este sistema fue desarrollado por estudiantes de la carrera de Informática y Sistemas de la FICH, como parte del evento <strong class="text-white">INFOSIS BUILD FEST 2026</strong>.</p>
+              <p class="mt-3 max-w-2xl text-sm leading-7 text-white/70">Combinamos formación académica, desarrollo web e inteligencia artificial para apoyar la gestión y visibilidad del Refugio Angelitos de Édgar.</p>
+              <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-semibold text-white/70"><span>FICH · UAGRM</span><span>30 de septiembre y 1 de octubre de 2026</span></div>
+              <a href="https://infosist.org" target="_blank" rel="noreferrer" class="button-primary mt-8">Conocer la carrera ↗</a>
+            </div>
+            <div class="hidden border-l border-white/15 pl-8 lg:block"><p class="text-xs font-bold uppercase tracking-widest text-sun">Una iniciativa</p><p class="mt-3 font-display text-2xl leading-tight text-white">que conecta aprendizaje, tecnología y compromiso social.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contacto" class="bg-cream px-6 py-24"><div class="mx-auto grid max-w-7xl gap-10 md:grid-cols-2 md:items-center"><div><p class="text-xs font-bold uppercase tracking-[.3em] text-ocean">Contacto</p><h2 class="mt-4 font-display text-5xl leading-tight text-ink">Conectemos para ayudar.</h2><p class="mt-5 max-w-md text-sm leading-7 text-ink/65">El refugio se encuentra en Santa Cruz de Bolivia. La ubicación exacta debe confirmarse directamente con el equipo antes de visitar.</p></div><div class="rounded-3xl bg-white p-8 shadow-soft"><p class="text-xs font-bold uppercase tracking-widest text-ink/50">WhatsApp publicado</p><p class="mt-2 text-3xl font-bold text-ocean">73107078</p><a class="button-primary mt-6 w-full" href="https://wa.me/59173107078" target="_blank" rel="noreferrer">Contactar por WhatsApp</a><div class="mt-6 flex gap-4 border-t border-ink/10 pt-5 text-sm font-bold"><a class="text-ocean underline" href="https://www.instagram.com/refugio_angelitos_de_edgar/" target="_blank" rel="noreferrer">Instagram</a><a class="text-ocean underline" href="https://www.facebook.com/AngelitosdeEdgarRefugio/" target="_blank" rel="noreferrer">Facebook</a></div></div></div></section>
+  </main>
+  <footer class="bg-white px-6 py-10"><div class="mx-auto flex max-w-7xl flex-col justify-between gap-5 text-sm md:flex-row"><div><p class="font-display text-xl text-ink">Angelitos de Édgar</p><p class="mt-2 text-ink/55">Rescate, cuidado y adopción responsable.</p></div><div class="text-left text-xs text-ink/50 md:text-right"><p>Información institucional basada en publicaciones y medios consultados.</p><div class="mt-3 flex gap-4 md:justify-end"><a href="https://eldeber.com.bo/santa-cruz/los-angelitos-de-edgar-el-refugio-propone-una-feria-de-adopcion-este-san-roque-para-darles-un-hogar-400-animales_526524/" target="_blank" rel="noreferrer" class="underline">Fuente: El Deber</a><a href="https://www.reduno.com.bo/noticias/bajan-las-temperaturas-en-santa-cruz-el-refugio-angelitos-de-edgar-necesita-ayuda-para-proteger-a-las-mascotas-202451716160" target="_blank" rel="noreferrer" class="underline">Fuente: Red Uno</a></div></div></div></footer>
+</Layout>
+<script>document.querySelector('#menu')?.addEventListener('click',()=>document.querySelector('#mobile')?.classList.toggle('hidden'));</script>
+
+

@@ -1,0 +1,8 @@
+﻿---
+import Layout from '../layouts.astro';
+---
+<Layout><main style="max-width: thirtyrem; margin:8rem auto;padding:2rem;"><h1>Iniciar sesión</h1><form id="f"><input name="usuario" placeholder="Usuario" required maxlength="15"/><input name="contrasena" type="password" placeholder="Contraseña" required maxlength="60"/><p id="m"></p><button>Entrar</button></form></main></Layout>
+<script>
+import {loginSchema} from '../schemas/schemas'; import {auth} from '../services/api'; import {authStore} from '../stores/auth';
+document.querySelector('#f')?.addEventListener('submit',async(e)=>{e.preventDefault();const f=e.currentTarget as HTMLFormElement;const v=loginSchema.safeParse(Object.fromEntries(new FormData(f)));const m=document.querySelector('#m');if(!v.success){if(m)m.textContent=v.error.issues[0].message;return}try{const r=await auth.login(v.data);authStore.set(r.token);location.href='/animals'}catch(x){if(m)m.textContent=x instanceof Error?x.message:'Error'}})
+</script>

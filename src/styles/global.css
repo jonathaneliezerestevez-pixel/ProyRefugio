@@ -1,0 +1,28 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: #fffaf0;
+  color: #103f4c;
+}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; }
+
+@layer components {
+  .button-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-sun px-6 py-3 text-sm font-bold text-ink shadow-sm transition hover:-translate-y-0.5 hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-sun focus:ring-offset-2;
+  }
+  .button-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-white/70 px-6 py-3 text-sm font-bold text-white transition hover:bg-white hover:text-ink focus:outline-none focus:ring-2 focus:ring-white;
+  }
+  .field {
+    @apply w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition placeholder:text-ink/40 focus:border-ocean focus:ring-4 focus:ring-ocean/10;
+  }
+  .label {
+    @apply mb-2 block text-sm font-semibold text-ink;
+  }
+}

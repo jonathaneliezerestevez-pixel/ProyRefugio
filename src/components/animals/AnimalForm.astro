@@ -1,0 +1,14 @@
+﻿---
+const { editing = false } = Astro.props;
+---
+<form id="animal-form" class="space-y-5 rounded-3xl bg-white p-6 shadow-soft md:p-8">
+  <div class="grid gap-5 md:grid-cols-2">
+    <label><span class="label">Nombre</span><input class="field" name="nombre" placeholder="Ej. Max" required /></label>
+    <label><span class="label">Raza</span><input class="field" name="raza" placeholder="Ej. Labrador" required /></label>
+    <label><span class="label">Edad</span><input class="field" type="number" min="0" name="edad" placeholder="0" required /></label>
+    <label><span class="label">Sexo</span><select class="field" name="sexo" required><option value="">Selecciona</option><option>Hembra</option><option>Macho</option></select></label>
+    <label class="md:col-span-2"><span class="label">Tipo de animal</span><select class="field" name="tipoAnimal" required><option value="">Selecciona</option><option>Perro</option><option>Gato</option></select></label>
+  </div>
+  <p id="form-message" class="hidden rounded-xl px-4 py-3 text-sm"></p>
+  <button class="button-primary w-full" type="submit">{editing ? 'Guardar cambios' : 'Registrar animal'}</button>
+</form>

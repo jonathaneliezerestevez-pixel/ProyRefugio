@@ -1,0 +1,9 @@
+﻿---
+const { compact = false } = Astro.props;
+---
+<footer class:list={["px-6 py-10", compact ? "bg-ink text-white" : "bg-cream text-ink"]}>
+  <div class="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm md:flex-row md:items-center">
+    <p class="font-display text-lg">Refugio · <span class="text-sun">juntos por ellos</span></p>
+    <p class="opacity-70">Cuidar también es amar.</p>
+  </div>
+</footer>

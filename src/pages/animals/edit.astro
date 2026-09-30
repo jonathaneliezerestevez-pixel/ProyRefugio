@@ -1,0 +1,7 @@
+﻿---
+import Layout from '../../layouts.astro';
+---
+<Layout><main style="max-width:40rem;margin:4rem auto;padding:2rem"><a href="/animals">← Volver</a><h1>Editar animal</h1><form id="f"><input name="nombre" required/><input name="raza" required/><input name="edad" type="number" min="0" required/><select name="sexo"><option>Hembra</option><option>Macho</option></select><select name="tipoAnimal"><option>Perro</option><option>Gato</option></select><button>Guardar</button></form><p id="m"></p></main></Layout>
+<script>
+import {animals} from '../../services/api';import {animalSchema} from '../../schemas/schemas';import {authStore} from '../../stores/auth';const id=Number(new URLSearchParams(location.search).get('id'));if(!authStore.get())location.href='/login';const f=document.querySelector('#f') as HTMLFormElement;const m=document.querySelector('#m');const a=(await animals.list()).find(x=>x.Identificador===id);if(!a)location.href='/animals';for(const [k,v] of Object.entries({nombre:a.Nombre,raza:a.Raza,edad:a.Edad,sexo:a.Sexo,tipoAnimal:a.TipoAnimal})){const e=f.elements.namedItem(k) as HTMLInputElement|HTMLSelectElement;e.value=String(v)}f.addEventListener('submit',async e=>{e.preventDefault();const v=animalSchema.safeParse(Object.fromEntries(new FormData(f)));if(!v.success){if(m)m.textContent=v.error.issues[0].message;return}await animals.update(id,v.data);location.href='/animals'})
+</script>

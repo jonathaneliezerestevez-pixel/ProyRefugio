@@ -1,0 +1,1 @@
+﻿export const authStore={get:()=>typeof localStorage==='undefined'?null:localStorage.getItem('refugio_token'),set:(x:string)=>localStorage.setItem('refugio_token',x),clear:()=>localStorage.removeItem('refugio_token')};

@@ -1,0 +1,4 @@
+﻿---
+const { type = 'submit', children = 'Continuar' } = Astro.props;
+---
+<button type={type} class="button-primary"><slot>{children}</slot></button>

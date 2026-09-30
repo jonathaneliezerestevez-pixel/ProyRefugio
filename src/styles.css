@@ -1,0 +1,13 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #20352D; background: #FFF9EE; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; }
+.font-display { font-family: Georgia, Cambria, 'Times New Roman', serif; }
+.button-primary { display:inline-flex; align-items:center; justify-content:center; border-radius:9999px; background:#ffc640; color:#173F35; padding:.85rem 1.5rem; font-size:.875rem; font-weight:700; transition:.2s; }
+.button-primary:hover { transform:translateY(-2px); background:#ffd45f; }
+.button-outline { display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.65); border-radius:9999px; color:white; padding:.85rem 1.5rem; font-size:.875rem; font-weight:700; transition:.2s; }
+.button-outline:hover { background:white; color:#2F6B4F; }
+

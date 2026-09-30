@@ -5,3 +5,6 @@ export const auth={login:(body:any)=>api<{token:string}>('/auth/login',{method:'
 export const animals={list:(q:any={})=>api<any[]>('/animals?'+new URLSearchParams(Object.fromEntries(Object.entries(q).filter(([,v])=>v)))),create:(x:any)=>api('/animals',{method:'POST',body:JSON.stringify(x)}),update:(id:number,x:any)=>api(`/animals/${id}`,{method:'PUT',body:JSON.stringify(x)})};
 
 
+
+export const authApi = auth;
+export const animalApi = animals;
